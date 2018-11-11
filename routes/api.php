@@ -15,3 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('wallet/store', 'Api\WalletController@store');
 Route::post('wallet/update', 'Api\WalletController@update');
+Route::post('wallet/balance', 'Api\WalletController@balance');
+
+Route::post('transactions', 'Api\TransactionController@view');
+Route::post('transactions/store', 'Api\TransactionController@store');
