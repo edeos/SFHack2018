@@ -6,23 +6,29 @@ use Illuminate\Database\Migrations\Migration;
 
 class Wallets extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        //
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('wallets', function (Blueprint $table) {
+			$table->increments('id');
+			$table->integer('name');
+			$table->string('wallet')->nullable();
+			$table->timestamps();
+			$table->softDeletes();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('wallets');
+	}
 }
