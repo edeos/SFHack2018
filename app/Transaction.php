@@ -17,7 +17,7 @@ class Transaction extends Model
 	public function wallets()
 	{
 
-		return $this->belongsTo(Wallet::class, 'id');
+		return $this->belongsTo(Wallet::class, 'wallet_id');
 
 	}
 
