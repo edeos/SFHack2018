@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\EosController;
 use App\Transaction;
 use App\Wallet;
 
@@ -12,27 +13,36 @@ class WalletController extends Controller
 
 	public function store(Request $request)
 	{
+		$name = 'user'.rand(1, 5).rand(1, 5).rand(1, 5).rand(1, 5).rand(1, 5);
+		$eos = EosController::create($name);
 
-		$student = $request->student_id . ':example.com';
+		if ($eos) {
 
-		$wallet = new Wallet;
-		$wallet->name = $student;
-		$wallet->wallet = 'wallet';
-		$wallet->save();
+			$wallet = new Wallet;
+			$wallet->name = $request->student_id.':example.com';
+			$wallet->wallet = $eos['wallet'];
+			$wallet->save();
 
-		return response()->json([
-			'wallet' => 'wallet',
-			'public_key' => 'public key',
-			'private_key' => 'private key',
-		], 200);
+			return response()->json([
+				'wallet' => $eos['wallet'],
+				'public_key' => $eos['public'],
+				'private_key' => $eos['private'],
+			], 200);
 
+		} else {
+			
+			return response()->json([
+				'success' => 'false',
+			], 503);
+
+		}
 	}
 
 	public function update(Request $request)
 	{
 
 		$wallet = new Wallet;
-		$wallet->name = $request->student_id;
+		$wallet->name = $request->student_id.':example.com';
 		$wallet->wallet = $request->wallet;
 		$wallet->save();
 
@@ -62,7 +72,7 @@ class WalletController extends Controller
 		}
 
 		return response()->json([
-			'balance' => number_format($balance, 4, '.', '') . ' EOS',
+			'balance' => number_format($balance, 4, '.', '') . ' EDE',
 		], 200);
 
 	}
