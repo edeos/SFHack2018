@@ -55,18 +55,19 @@
 
 			<table class="table">
 
-				<th>
+				<tr>
 
 					<td>id</td>
 					<td>trns id</td>
 					<td>account</td>
 					<td>status</td>
+					<td>host</td>
 					<td>event</td>
 					<td>course</td>
 					<td>amount</td>
 					<td>date</td>
 
-				</th>
+				</tr>
 
 			@foreach($transactions as $transaction)
 
@@ -81,6 +82,8 @@
 					<td>{{ $transaction->course_id }}</td>
 					<td>{{ $transaction->amount }}</td>
 					<td>{{ $transaction->created_at }}</td>
+
+				</tr>
 
 			@endforeach
 
